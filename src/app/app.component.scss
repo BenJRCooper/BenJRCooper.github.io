@@ -1,0 +1,30 @@
+:host {
+  height: 100%;
+  width: 100%;
+}
+
+.game-grid {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-rows: repeat(8, auto);
+}
+
+.cols {
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(8, auto);
+}
+
+.row:nth-child(even) {
+  background: lightblue;
+  .cell:nth-child(odd) {
+    background: lightcoral;
+  }
+}
+.row:nth-child(odd) {
+  background: lightcoral;
+  .cell:nth-child(odd) {
+    background: lightblue;
+  }
+}
