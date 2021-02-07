@@ -1,8 +1,29 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Injectable, OnInit } from '@angular/core';
+import { ComponentStore } from '@ngrx/component-store';
 
 interface Point {
   x: number;
   y: number;
+}
+
+interface Player {
+  location: Point;
+  health: number;
+  name: string;
+}
+
+interface GameState {
+  player1: Player;
+  player2: Player;
+  shot1: Point;
+  shot2: Point;
+}
+
+@Injectable()
+export class GameStore extends ComponentStore<GameState> {
+  constructor() {
+    super();
+  }
 }
 
 @Component({
