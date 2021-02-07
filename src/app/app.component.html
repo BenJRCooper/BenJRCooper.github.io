@@ -1,7 +1,34 @@
 <div class="game-grid">
-  <div class="cols row" *ngFor="let x of xs; let xId = index">
-    <div class="cell" *ngFor="let y of ys; let yId = index">
-      Box {{ xId }} {{ yId }}
+  <div class="cols row" *ngFor="let y of ys; let yId = index">
+    <div class="cell" *ngFor="let x of xs; let xId = index">
+      <div class="cords">{{ xId }} {{ yId }}</div>
+      <ng-container
+        class="robot"
+        *ngIf="player1.x === xId && player1.y === yId"
+      >
+        <img
+          class="robot"
+          src="https://c.files.bbci.co.uk/18236/production/_114507889_tele.robot.looks.hand.jpg"
+          width="40px"
+          height="40px"
+        />
+      </ng-container>
+      <ng-container *ngIf="player2.x === xId && player2.y === yId">
+        <img
+          class="robot"
+          src="https://www.hullccnews.co.uk/wp-content/uploads/2019/09/Titan_close_up_angle-777x437.jpg"
+          width="40px"
+          height="40px"
+        />
+      </ng-container>
+      <ng-container *ngIf="shot1.x === xId && shot1.y === yId">
+        <img
+          class="robot"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRgVtULsenBemJPjdtgSRV8mBiEulcdy44QA&usqp=CAU"
+          width="70%"
+          height="70%"
+        />
+      </ng-container>
     </div>
   </div>
 </div>

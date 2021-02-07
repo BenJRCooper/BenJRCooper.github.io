@@ -7,13 +7,13 @@
   display: grid;
   height: 100%;
   width: 100%;
-  grid-template-rows: repeat(8, auto);
+  grid-template-rows: repeat(8, calc(100vh / 8));
 }
 
 .cols {
   display: grid;
   height: 100%;
-  grid-template-columns: repeat(8, auto);
+  grid-template-columns: repeat(8, calc(100vw / 8));
 }
 
 .row:nth-child(even) {
@@ -27,4 +27,21 @@
   .cell:nth-child(odd) {
     background: lightblue;
   }
+}
+
+.cell {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  justify-items: center;
+  align-items: center;
+  overflow: hidden;
+
+  .robot {
+    grid-area: 2 /2;
+  }
+}
+
+.cords {
+  position: relative;
 }
