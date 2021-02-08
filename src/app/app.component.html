@@ -1,34 +1,36 @@
-<div class="game-grid">
+<div class="game-grid" (tap)="onTap($event)">
   <div class="cols row" *ngFor="let y of ys; let yId = index">
-    <div class="cell" *ngFor="let x of xs; let xId = index">
-      <div class="cords">{{ xId }} {{ yId }}</div>
-      <ng-container
-        class="robot"
-        *ngIf="player1.x === xId && player1.y === yId"
-      >
-        <img
-          class="robot"
-          src="https://c.files.bbci.co.uk/18236/production/_114507889_tele.robot.looks.hand.jpg"
-          width="40px"
-          height="40px"
-        />
-      </ng-container>
-      <ng-container *ngIf="player2.x === xId && player2.y === yId">
-        <img
-          class="robot"
-          src="https://www.hullccnews.co.uk/wp-content/uploads/2019/09/Titan_close_up_angle-777x437.jpg"
-          width="40px"
-          height="40px"
-        />
-      </ng-container>
-      <ng-container *ngIf="shot1.x === xId && shot1.y === yId">
-        <img
-          class="robot"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRgVtULsenBemJPjdtgSRV8mBiEulcdy44QA&usqp=CAU"
-          width="70%"
-          height="70%"
-        />
-      </ng-container>
-    </div>
+    <div class="cell" *ngFor="let x of xs; let xId = index"></div>
   </div>
 </div>
+<img
+  class="robot-1"
+  [ngStyle]="{ top: robot1 + 'px' }"
+  src="https://c.files.bbci.co.uk/18236/production/_114507889_tele.robot.looks.hand.jpg"
+/>
+
+<img
+  class="robot-2"
+  [ngStyle]="{ top: robot2 + 'px' }"
+  src="https://www.hullccnews.co.uk/wp-content/uploads/2019/09/Titan_close_up_angle-777x437.jpg"
+/>
+<img
+  class="shot-1"
+  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRgVtULsenBemJPjdtgSRV8mBiEulcdy44QA&usqp=CAU"
+  [ngStyle]="{
+    top: robot1 + 'px',
+    left: shot1 + 'px',
+    visibility: shot1 < 0 ? 'hidden' : 'unset'
+  }"
+  [ngClass]="shot1 > 0 ? 'fire' : ''"
+/>
+<img
+  class="shot-2"
+  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRgVtULsenBemJPjdtgSRV8mBiEulcdy44QA&usqp=CAU"
+  [ngStyle]="{
+    top: robot2 + 'px',
+    right: shot2 + 'px',
+    visibility: shot2 < 0 ? 'hidden' : 'unset'
+  }"
+  [ngClass]="shot2 > 0 ? 'fire' : ''"
+/>

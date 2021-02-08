@@ -29,19 +29,38 @@
   }
 }
 
-.cell {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr;
-  justify-items: center;
-  align-items: center;
-  overflow: hidden;
-
-  .robot {
-    grid-area: 2 /2;
-  }
+@mixin robot {
+  position: fixed;
+  z-index: 1;
+  transition: top 0.5s linear;
+  top: 200px;
+  width: 50px;
+  height: 50px;
+}
+.robot-1 {
+  @include robot;
+  left: 40px;
+}
+.robot-2 {
+  @include robot;
+  right: 40px;
 }
 
-.cords {
-  position: relative;
+@mixin shot {
+  position: fixed;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+}
+.shot-1 {
+  @include shot;
+}
+.shot-1.fire {
+  transition: left 3s ease-in;
+}
+.shot-2 {
+  @include shot;
+}
+.shot-2.fire {
+  transition: right 3s ease-in;
 }

@@ -1,5 +1,7 @@
 import { Component, HostListener, Injectable, OnInit } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
+import { timer } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 interface Point {
   x: number;
@@ -36,39 +38,35 @@ export class AppComponent implements OnInit {
   xs = Array.from(Array(this.gameSize));
   ys = Array.from(Array(this.gameSize));
 
-  player1: Point = {
-    x: 0,
-    y: 2,
-  };
-  player2: Point = {
-    x: 7,
-    y: 2,
-  };
-  shot1: Point = {
-    x: 1,
-    y: 1,
-  };
+  ngOnInit() {}
 
-  ngOnInit() {
-    console.log(this.xs, this.ys);
+  onTap(event: any) {
+    const isRobot1 = event.center.x < this.windowWidth / 2;
+    if (isRobot1) {
+      this.robot1 = event.center.y;
+      timer(1000, 3000)
+        .pipe(take(2))
+        .subscribe((i) => {
+          this.shot1 = i === 0 ? this.windowWidth : -1;
+        });
+    } else {
+      this.robot2 = event.center.y;
+      timer(1000, 3000)
+        .pipe(take(2))
+        .subscribe((i) => {
+          this.shot2 = i === 0 ? this.windowWidth : -1;
+        });
+    }
   }
 
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    console.log(event);
-    switch (event.code) {
-      case 'ArrowUp':
-        this.player1.y = Math.max(0, this.player1.y - 1);
-        break;
-      case 'ArrowDown':
-        this.player1.y = Math.min(this.player1.y + 1, this.gameSize - 1);
-        break;
-      case 'ArrowLeft':
-        this.player1.x = Math.max(0, this.player1.x - 1);
-        break;
-      case 'ArrowRight':
-        this.player1.x = Math.min(this.player1.x + 1, this.gameSize - 1);
-        break;
-    }
+  windowWidth = window.innerWidth;
+  robot1 = 200;
+  robot2 = 200;
+  shot1 = -100;
+  shot2 = -100;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.windowWidth = event.target.innerWidth;
   }
 }
